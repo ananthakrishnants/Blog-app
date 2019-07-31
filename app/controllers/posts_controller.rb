@@ -1,10 +1,9 @@
 class PostsController < ApplicationController
-	
 	def new
 		@post=Post.new
 	end
 	def index
-		@posts = Post.where(:user_id => current_user.id)
+		@posts = Post.all
 	end
 
 	def create
