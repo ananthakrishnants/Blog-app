@@ -5,11 +5,17 @@
 </p>
  
 <p>
-  <strong>Body:</strong>
+  <strong>Post:</strong>
   <%= @post.body %>
 </p>
+<% if can? :destroy,@post %>
+<button class='btn btn-secondary'><%= link_to 'Destroy', post_path(@post),method: :delete, data: { confirm: 'Are you sure?' } %></button>
+<%end%>
 </div>
 
+
+<div class='container'>
+  <div>
 <h3>Comments </h3>
 <% @post.comments.each do|comment|%>
 <p>
@@ -17,6 +23,7 @@
 <%= comment.body%>
 </p>
 <%end%>
+</div>
 
 <h5>Add comments</h5>
 <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
@@ -24,7 +31,7 @@
   <%= form.hidden_field :post_id, :value=>@post.id%>
   <div class="form-group">
   <p>
-    <%= form.label :body %><br>
+    
     <%= form.text_area :body %>
   </p>
 </div>
@@ -35,3 +42,4 @@
 </div>
 <% end %>
 <%=link_to 'Back',posts_path%>
+</div>
